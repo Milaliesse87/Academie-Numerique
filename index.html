@@ -136,12 +136,19 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
         }
 
+        /* Ajustement pour forcer l'iframe Google Drive à s'étirer et supprimer les bandes noires */
+        .video-player-wrapper iframe {
+            transform: scale(1.02);
+            object-fit: cover;
+        }
+
         .video-placeholder-cover {
             background: linear-gradient(rgba(0,26,77,0.75), rgba(0,26,77,0.75)), 
             url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
             display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer;
             transition: 0.3s; padding: 15px; text-align: center; color: white;
             box-sizing: border-box;
+            z-index: 5;
         }
 
         .video-placeholder-text {
@@ -695,9 +702,9 @@
         function playVideo() {
             const wrapper = document.getElementById('videoWrapper');
             wrapper.innerHTML = `
-                <iframe src="https://drive.google.com/file/d/1wu-PlTUMPc1qgYPSq2zK27c0JWAwAob4/preview" 
+                <iframe src="https://drive.google.com/file/d/1wu-PlTUMPc1qgYPSq2zK27c0JWAwAob4/preview?autoplay=1" 
                         title="Vidéo de présentation du succès de la formation" 
-                        allow="autoplay" 
+                        allow="autoplay; fullscreen" 
                         allowfullscreen>
                 </iframe>
             `;

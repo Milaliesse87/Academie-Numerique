@@ -136,10 +136,12 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
         }
 
-        /* Ajustement pour forcer l'iframe Google Drive à s'étirer et supprimer les bandes noires */
+        /* Correction pour agrandir l'iframe et supprimer les bandes noires latérales */
         .video-player-wrapper iframe {
-            transform: scale(1.02);
-            object-fit: cover;
+            width: 120% !important;
+            height: 120% !important;
+            top: -10% !important;
+            left: -10% !important;
         }
 
         .video-placeholder-cover {

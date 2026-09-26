@@ -113,7 +113,7 @@
         }
         .secure-notice i { color: var(--success); }
 
-        /* --- SECTION VIDÉO DE PRÉSENTATION CHIRURGICALE --- */
+        /* --- SECTION VIDÉO CHIRURGICALE PROPRE (HTML5 NATIF) --- */
         .video-presentation-section { padding: 60px 8%; background: #ffffff; text-align: center; border-bottom: 1px solid #e1e8ed; }
         .video-container-box { max-width: 750px; margin: 0 auto; }
         .badge-demo { 
@@ -124,26 +124,21 @@
         .video-presentation-section h2 { color: var(--navy); font-size: 1.8rem; margin-bottom: 8px; }
         .video-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
 
-        /* Conteneur masquant les bandes et la barre de titre noire de Google Drive */
         .video-player-wrapper {
             position: relative; 
             width: 100%; 
-            padding-top: 56.25%; /* Ratio 16:9 propre */
-            background: #000; 
             border-radius: 12px; 
-            overflow: hidden; /* C'est ce qui rogne ce qui dépasse */
+            overflow: hidden; 
             box-shadow: 0 20px 40px rgba(0, 26, 77, 0.2);
             border: 3px solid var(--gold);
+            background: #000;
         }
 
-        /* L'iframe est agrandie et remontée pour éjecter la barre noire hors du cadre visible */
-        .video-player-wrapper iframe {
-            position: absolute; 
-            top: -55px; /* Remonte pour cacher la barre de titre Google Drive */
-            left: 0; 
-            width: 100%; 
-            height: calc(100% + 55px); /* Compense le décalage */
-            border: none;
+        .video-player-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 450px;
         }
 
         /* --- SECTION APERÇU DU PROGRAMME (SLIDER) --- */
@@ -420,20 +415,20 @@
         </div>
     </section>
 
-    <!-- SECTION VIDÉO DE PRÉSENTATION DIRECTE ET AUTOMATIQUE -->
+    <!-- SECTION VIDÉO PROPRE HTML5 NATIF (FIN DES BANDES NOIRES ET DES BLOCAGES) -->
     <section class="video-presentation-section" id="presentation-video">
         <div class="video-container-box">
             <span class="badge-demo"><i class="fas fa-play-circle"></i> DÉCOUVREZ NOTRE MÉTHODE DE SUCCÈS</span>
             <h2>Comment cette formation va transformer vos résultats</h2>
-            <p class="video-subtitle">La vidéo se lance automatiquement dès l'affichage de la page.</p>
+            <p class="video-subtitle">Cliquez sur lecture pour découvrir la présentation exclusive.</p>
 
             <div class="video-player-wrapper">
-                <iframe src="https://drive.google.com/file/d/1wu-PlTUMPc1qgYPSq2zK27c0JWAwAob4/preview?autoplay=1" 
-                        title="Vidéo de présentation du succès de la formation" 
-                        allow="autoplay; fullscreen" 
-                        allowfullscreen>
-                </iframe>
+                <video controls playsinline preload="metadata">
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture de vidéos.
+                </video>
             </div>
+            <p style="font-size: 0.75rem; color: #888; margin-top: 8px;">(Remplacez l'URL source ci-dessus par le lien direct de votre fichier vidéo hébergé)</p>
         </div>
     </section>
 
@@ -736,6 +731,8 @@
         ];
 
         let reviewIndex = 0;
+
+        class="review-card"
 
         function initLiveReviews() {
             const container = document.getElementById('reviewsContainer');

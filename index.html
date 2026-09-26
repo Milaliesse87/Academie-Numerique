@@ -113,7 +113,7 @@
         }
         .secure-notice i { color: var(--success); }
 
-        /* --- SECTION VIDÉO CORRIGÉE EN FORMAT VERTICAL PUR --- */
+        /* --- SECTION VIDÉO CORRIGÉE POUR MASQUER LES CONTRÔLES INTRUSIFS GOOGLE DRIVE --- */
         .video-presentation-section { padding: 60px 8%; background: #ffffff; text-align: center; border-bottom: 1px solid #e1e8ed; }
         .video-container-box { max-width: 750px; margin: 0 auto; }
         .badge-demo { 
@@ -124,26 +124,26 @@
         .video-presentation-section h2 { color: var(--navy); font-size: 1.8rem; margin-bottom: 8px; text-transform: lowercase; }
         .video-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
 
-        /* NOUVEAU CONTENEUR VERTICAL STRICT (9:16) - FIN DES BANDES NOIRES */
+        /* CONTENEUR VERTICAL AVEC MASQUAGE DES BARRES GOOGLE DRIVE */
         .video-portrait-wrapper {
             position: relative; 
             width: 100%; 
-            max-width: 360px; /* Largeur idéale pour un format vertical type smartphone/short */
+            max-width: 320px; 
             margin: 0 auto;
-            aspect-ratio: 9 / 16; /* Force le format vertical parfait */
+            aspect-ratio: 9 / 16; 
             background: #000; 
             border-radius: 12px; 
-            overflow: hidden;
+            overflow: hidden; /* Masque tout ce qui dépasse des bords pour cacher les barres */
             box-shadow: 0 20px 40px rgba(0, 26, 77, 0.2);
             border: 2px solid var(--gold);
         }
 
         .video-portrait-wrapper iframe {
             position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
+            top: -8%; 
+            left: -8%; 
+            width: 116%; 
+            height: 116%; 
             border: none;
         }
 
@@ -421,14 +421,13 @@
         </div>
     </section>
 
-    <!-- SECTION VIDÉO CORRIGÉE (ANCIENNE CAGE SUPPRIMÉE ET REMPLACÉE PAR LE FORMAT VERTICAL PUR) -->
+    <!-- SECTION VIDÉO CORRIGÉE (BARRES GOOGLE DRIVE MASQUÉES SUR MOBILE) -->
     <section class="video-presentation-section" id="presentation-video">
         <div class="video-container-box">
             <span class="badge-demo"><i class="fas fa-play-circle"></i> DÉCOUVREZ NOTRE MÉTHODE DE SUCCÈS</span>
             <h2>résultats</h2>
             <p class="video-subtitle">Cliquez ci-dessous pour lancer la vidéo de présentation exclusive de notre Académie.</p>
 
-            <!-- Conteneur vertical direct sans bandes noires -->
             <div class="video-portrait-wrapper">
                 <iframe src="https://drive.google.com/file/d/1wu-PlTUMPc1qgYPSq2zK27c0JWAwAob4/preview" 
                         title="Vidéo de présentation de la formation" 

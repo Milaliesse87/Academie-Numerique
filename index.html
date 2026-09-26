@@ -696,9 +696,9 @@
     <script>
         function playVideo() {
             const wrapper = document.getElementById('videoWrapper');
-            // Utilisation du format embed propre avec autoplay et masquage des éléments YouTube superflus
+            // Ajout des paramètres control, rel=0, modestbranding=1 et showinfo pour masquer le profil/titre
             wrapper.innerHTML = `
-                <iframe src="https://www.youtube-nocookie.com/embed/SwJeiEb0quw?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1" 
+                <iframe src="https://www.youtube-nocookie.com/embed/SwJeiEb0quw?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&iv_load_policy=3" 
                         title="Vidéo de présentation" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen>

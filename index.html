@@ -113,7 +113,7 @@
         }
         .secure-notice i { color: var(--success); }
 
-        /* --- SECTION VIDÉO CORRIGÉE CHIRURGICALEMENT --- */
+        /* --- SECTION VIDÉO DE PRÉSENTATION OPTIMISÉE MOBILE --- */
         .video-presentation-section { padding: 60px 8%; background: #ffffff; text-align: center; border-bottom: 1px solid #e1e8ed; }
         .video-container-box { max-width: 750px; margin: 0 auto; }
         .badge-demo { 
@@ -124,25 +124,46 @@
         .video-presentation-section h2 { color: var(--navy); font-size: 1.8rem; margin-bottom: 8px; }
         .video-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
 
-        .video-iframe-wrapper {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* Ratio 16:9 parfait */
-            height: 0;
-            border-radius: 12px;
-            overflow: hidden; /* Masque tout ce qui dépasse pour couper la barre Google */
+        .video-player-wrapper {
+            position: relative; width: 100%; padding-top: 56.25%; 
+            background: #000; border-radius: 12px; overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 26, 77, 0.2);
             border: 3px solid var(--gold);
-            background: #000;
         }
 
-        .video-iframe-wrapper iframe {
-            position: absolute;
-            top: -50px; /* Décale la barre grise Google hors champ vers le haut */
-            left: -2%;
-            width: 104%;
-            height: calc(100% + 100px); /* Compense le décalage pour garder la vidéo entière */
-            border: none;
+        .video-player-wrapper iframe, 
+        .video-player-wrapper .video-placeholder-cover {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+        }
+
+        .video-placeholder-cover {
+            background: linear-gradient(rgba(0,26,77,0.75), rgba(0,26,77,0.75)), 
+            url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer;
+            transition: 0.3s; padding: 15px; text-align: center; color: white;
+            box-sizing: border-box;
+        }
+
+        .video-placeholder-text {
+            position: relative; z-index: 2; margin-bottom: 12px; max-width: 600px; padding: 0 10px;
+        }
+        .video-placeholder-text h4 { font-size: 1.1rem; color: var(--bright-gold); margin-bottom: 6px; font-weight: 700; line-height: 1.3; }
+        .video-placeholder-text p { font-size: 0.85rem; opacity: 0.95; line-height: 1.4; }
+
+        .play-button-pulse {
+            position: relative; z-index: 2; width: 65px; height: 65px; background: var(--gold);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: var(--navy); font-size: 1.5rem; padding-left: 3px;
+            box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7);
+            animation: pulsePlay 2s infinite; transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .video-placeholder-cover:hover .play-button-pulse { transform: scale(1.1); }
+
+        @keyframes pulsePlay {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 18px rgba(197, 160, 89, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
         }
 
         /* --- SECTION APERÇU DU PROGRAMME (SLIDER) --- */
@@ -344,6 +365,12 @@
             .author-card { flex-direction: column; text-align: center; }
             .footer-links { flex-direction: column; gap: 10px; }
         }
+
+        @media (max-width: 480px) {
+            .video-placeholder-text h4 { font-size: 0.95rem; }
+            .video-placeholder-text p { font-size: 0.75rem; }
+            .play-button-pulse { width: 50px; height: 50px; font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
@@ -419,18 +446,23 @@
         </div>
     </section>
 
-    <!-- SECTION VIDÉO CORRIGÉE CHIRURGICALEMENT -->
+    <!-- SECTION VIDÉO DE PRÉSENTATION CIBLÉE -->
     <section class="video-presentation-section" id="presentation-video">
         <div class="video-container-box">
             <span class="badge-demo"><i class="fas fa-play-circle"></i> DÉCOUVREZ NOTRE MÉTHODE DE SUCCÈS</span>
             <h2>Comment cette formation va transformer vos résultats</h2>
-            <p class="video-subtitle">Cliquez sur lecture pour découvrir la présentation exclusive.</p>
+            <p class="video-subtitle">Cliquez ci-dessous pour lancer la vidéo de présentation exclusive de notre Académie.</p>
 
-            <div class="video-iframe-wrapper">
-                <iframe src="https://drive.google.com/file/d/1wu-PlTUMPc1qgYPSq2zK27c0JWAwAob4/preview" 
-                        allow="autoplay" 
-                        allowfullscreen>
-                </iframe>
+            <div class="video-player-wrapper" id="videoWrapper">
+                <div class="video-placeholder-cover" id="videoCover" onclick="playVideo()">
+                    <div class="video-placeholder-text">
+                        <h4>« Votre satisfaction est notre plus grande réussite »</h4>
+                        <p>Découvrez pourquoi notre formation à seulement 25 € vous garantit des résultats concrets, rapides et sans compromis.</p>
+                    </div>
+                    <div class="play-button-pulse">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -660,6 +692,17 @@
     </footer>
 
     <script>
+        function playVideo() {
+            const wrapper = document.getElementById('videoWrapper');
+            wrapper.innerHTML = `
+                <iframe src="https://drive.google.com/file/d/1wu-PlTUMPc1qgYPSq2zK27c0JWAwAob4/preview" 
+                        title="Vidéo de présentation de la formation" 
+                        allow="autoplay" 
+                        allowfullscreen>
+                </iframe>
+            `;
+        }
+
         function toggleFaq(element) {
             element.classList.toggle('active');
         }

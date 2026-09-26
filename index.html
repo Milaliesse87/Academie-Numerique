@@ -113,7 +113,7 @@
         }
         .secure-notice i { color: var(--success); }
 
-        /* --- SECTION VIDÉO DE PRÉSENTATION OPTIMISÉE SANS TITRE NI PARTAGE --- */
+        /* --- SECTION VIDÉO PROPRE (100% SANS PROFIL NI YOUTUBE) --- */
         .video-presentation-section { padding: 60px 8%; background: #ffffff; text-align: center; border-bottom: 1px solid #e1e8ed; }
         .video-container-box { max-width: 750px; margin: 0 auto; }
         .badge-demo { 
@@ -131,7 +131,7 @@
             border: 3px solid var(--gold);
         }
 
-        .video-player-wrapper iframe, 
+        .video-player-wrapper video, 
         .video-placeholder-cover {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
         }
@@ -446,7 +446,7 @@
         </div>
     </section>
 
-    <!-- SECTION VIDÉO DE PRÉSENTATION NETTOYÉE (SANS TITRE NI PARTAGE YOUTUBE) -->
+    <!-- SECTION VIDÉO PROPRE (HTML5 DIRECT SANS PROFIL GOOGLE NI YOUTUBE) -->
     <section class="video-presentation-section" id="presentation-video">
         <div class="video-container-box">
             <span class="badge-demo"><i class="fas fa-play-circle"></i> DÉCOUVREZ NOTRE MÉTHODE DE SUCCÈS</span>
@@ -454,8 +454,8 @@
             <p class="video-subtitle">Cliquez ci-dessous pour lancer la vidéo de présentation exclusive de notre Académie.</p>
 
             <div class="video-player-wrapper" id="videoWrapper">
-                <!-- La fausse couverture masque entièrement le lecteur et ses boutons natifs jusqu'au clic -->
-                <div class="video-placeholder-cover" id="videoCover" onclick="playVideo()">
+                <!-- La fausse couverture masque entièrement la vidéo avant le clic -->
+                <div class="video-placeholder-cover" id="videoCover" onclick="playDirectVideo()">
                     <div class="video-placeholder-text">
                         <h4>« Votre satisfaction est notre plus grande réussite »</h4>
                         <p>Découvrez pourquoi notre formation à seulement 25 € vous garantit des résultats concrets, rapides et sans compromis.</p>
@@ -693,15 +693,14 @@
     </footer>
 
     <script>
-        function playVideo() {
+        function playDirectVideo() {
             const wrapper = document.getElementById('videoWrapper');
-            // Paramètres stricts de l'iframe YouTube pour limiter au maximum l'affichage des éléments parasites
+            // Remplace l'élément par une balise <video> HTML5 pure (sans aucun lien ni profil Google/YouTube)
             wrapper.innerHTML = `
-                <iframe src="https://www.youtube-nocookie.com/embed/SwJeiEb0quw?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1" 
-                        title="Vidéo de présentation de l'Académie" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                </iframe>
+                <video controls autoplay playsinline style="width:100%; height:100%; object-fit:cover;">
+                    <source src="METS_ICI_LE_LIEN_DIRECT_DE_TA_VIDEO.mp4" type="video/mp4">
+                    Votre navigateur ne prend pas en charge la lecture de vidéos.
+                </video>
             `;
         }
 

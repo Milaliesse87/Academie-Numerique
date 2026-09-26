@@ -113,7 +113,7 @@
         }
         .secure-notice i { color: var(--success); }
 
-        /* --- SECTION VIDÉO PROPRE GOOGLE DRIVE --- */
+        /* --- SECTION VIDÉO CORRIGÉE CHIRURGICALEMENT --- */
         .video-presentation-section { padding: 60px 8%; background: #ffffff; text-align: center; border-bottom: 1px solid #e1e8ed; }
         .video-container-box { max-width: 750px; margin: 0 auto; }
         .badge-demo { 
@@ -130,7 +130,7 @@
             padding-bottom: 56.25%; /* Ratio 16:9 parfait */
             height: 0;
             border-radius: 12px;
-            overflow: hidden;
+            overflow: hidden; /* Masque tout ce qui dépasse pour couper la barre Google */
             box-shadow: 0 20px 40px rgba(0, 26, 77, 0.2);
             border: 3px solid var(--gold);
             background: #000;
@@ -138,10 +138,10 @@
 
         .video-iframe-wrapper iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: -50px; /* Décale la barre grise Google hors champ vers le haut */
+            left: -2%;
+            width: 104%;
+            height: calc(100% + 100px); /* Compense le décalage pour garder la vidéo entière */
             border: none;
         }
 
@@ -419,7 +419,7 @@
         </div>
     </section>
 
-    <!-- SECTION VIDÉO INTÉGRÉE GOOGLE DRIVE PROPRE -->
+    <!-- SECTION VIDÉO CORRIGÉE CHIRURGICALEMENT -->
     <section class="video-presentation-section" id="presentation-video">
         <div class="video-container-box">
             <span class="badge-demo"><i class="fas fa-play-circle"></i> DÉCOUVREZ NOTRE MÉTHODE DE SUCCÈS</span>

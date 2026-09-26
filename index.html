@@ -113,7 +113,7 @@
         }
         .secure-notice i { color: var(--success); }
 
-        /* --- SECTION VIDÉO DE PRÉSENTATION CORRIGÉE --- */
+        /* --- SECTION VIDÉO CORRIGÉE EN FORMAT VERTICAL PUR --- */
         .video-presentation-section { padding: 60px 8%; background: #ffffff; text-align: center; border-bottom: 1px solid #e1e8ed; }
         .video-container-box { max-width: 750px; margin: 0 auto; }
         .badge-demo { 
@@ -121,19 +121,30 @@
             font-size: 0.75rem; padding: 6px 14px; border-radius: 20px; text-transform: uppercase; 
             letter-spacing: 1px; display: inline-block; margin-bottom: 12px; 
         }
-        .video-presentation-section h2 { color: var(--navy); font-size: 1.8rem; margin-bottom: 8px; }
+        .video-presentation-section h2 { color: var(--navy); font-size: 1.8rem; margin-bottom: 8px; text-transform: lowercase; }
         .video-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
 
-        /* Intégration directe propre, sans cage intermédiaire et sans bandes noires */
-        .video-player-wrapper {
-            position: relative; width: 100%; padding-top: 56.25%; 
-            background: #000; border-radius: 12px; overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 26, 77, 0.15);
+        /* NOUVEAU CONTENEUR VERTICAL STRICT (9:16) - FIN DES BANDES NOIRES */
+        .video-portrait-wrapper {
+            position: relative; 
+            width: 100%; 
+            max-width: 360px; /* Largeur idéale pour un format vertical type smartphone/short */
+            margin: 0 auto;
+            aspect-ratio: 9 / 16; /* Force le format vertical parfait */
+            background: #000; 
+            border-radius: 12px; 
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 26, 77, 0.2);
             border: 2px solid var(--gold);
         }
 
-        .video-player-wrapper iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+        .video-portrait-wrapper iframe {
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            border: none;
         }
 
         /* --- SECTION APERÇU DU PROGRAMME (SLIDER) --- */
@@ -410,14 +421,15 @@
         </div>
     </section>
 
-    <!-- SECTION VIDÉO DE PRÉSENTATION CORRIGÉE (SANS CAGE, DIRECTEMENT INTÉGRÉE PROPREMENT) -->
+    <!-- SECTION VIDÉO CORRIGÉE (ANCIENNE CAGE SUPPRIMÉE ET REMPLACÉE PAR LE FORMAT VERTICAL PUR) -->
     <section class="video-presentation-section" id="presentation-video">
         <div class="video-container-box">
             <span class="badge-demo"><i class="fas fa-play-circle"></i> DÉCOUVREZ NOTRE MÉTHODE DE SUCCÈS</span>
-            <h2>Comment cette formation va transformer vos résultats</h2>
-            <p class="video-subtitle">Regardez la vidéo de présentation exclusive ci-dessous.</p>
+            <h2>résultats</h2>
+            <p class="video-subtitle">Cliquez ci-dessous pour lancer la vidéo de présentation exclusive de notre Académie.</p>
 
-            <div class="video-player-wrapper">
+            <!-- Conteneur vertical direct sans bandes noires -->
+            <div class="video-portrait-wrapper">
                 <iframe src="https://drive.google.com/file/d/1wu-PlTUMPc1qgYPSq2zK27c0JWAwAob4/preview" 
                         title="Vidéo de présentation de la formation" 
                         allow="autoplay" 

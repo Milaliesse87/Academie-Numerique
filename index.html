@@ -113,7 +113,7 @@
         }
         .secure-notice i { color: var(--success); }
 
-        /* --- SECTION VIDÉO CHIRURGICALE PROPRE (HTML5 NATIF) --- */
+        /* --- SECTION VIDÉO PROPRE GOOGLE DRIVE --- */
         .video-presentation-section { padding: 60px 8%; background: #ffffff; text-align: center; border-bottom: 1px solid #e1e8ed; }
         .video-container-box { max-width: 750px; margin: 0 auto; }
         .badge-demo { 
@@ -124,21 +124,25 @@
         .video-presentation-section h2 { color: var(--navy); font-size: 1.8rem; margin-bottom: 8px; }
         .video-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
 
-        .video-player-wrapper {
-            position: relative; 
-            width: 100%; 
-            border-radius: 12px; 
-            overflow: hidden; 
+        .video-iframe-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Ratio 16:9 parfait */
+            height: 0;
+            border-radius: 12px;
+            overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 26, 77, 0.2);
             border: 3px solid var(--gold);
             background: #000;
         }
 
-        .video-player-wrapper video {
+        .video-iframe-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            display: block;
-            max-height: 450px;
+            height: 100%;
+            border: none;
         }
 
         /* --- SECTION APERÇU DU PROGRAMME (SLIDER) --- */
@@ -415,20 +419,19 @@
         </div>
     </section>
 
-    <!-- SECTION VIDÉO PROPRE HTML5 NATIF (FIN DES BANDES NOIRES ET DES BLOCAGES) -->
+    <!-- SECTION VIDÉO INTÉGRÉE GOOGLE DRIVE PROPRE -->
     <section class="video-presentation-section" id="presentation-video">
         <div class="video-container-box">
             <span class="badge-demo"><i class="fas fa-play-circle"></i> DÉCOUVREZ NOTRE MÉTHODE DE SUCCÈS</span>
             <h2>Comment cette formation va transformer vos résultats</h2>
             <p class="video-subtitle">Cliquez sur lecture pour découvrir la présentation exclusive.</p>
 
-            <div class="video-player-wrapper">
-                <video controls playsinline preload="metadata">
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                    Votre navigateur ne supporte pas la lecture de vidéos.
-                </video>
+            <div class="video-iframe-wrapper">
+                <iframe src="https://drive.google.com/file/d/1wu-PlTUMPc1qgYPSq2zK27c0JWAwAob4/preview" 
+                        allow="autoplay" 
+                        allowfullscreen>
+                </iframe>
             </div>
-            <p style="font-size: 0.75rem; color: #888; margin-top: 8px;">(Remplacez l'URL source ci-dessus par le lien direct de votre fichier vidéo hébergé)</p>
         </div>
     </section>
 
@@ -731,8 +734,6 @@
         ];
 
         let reviewIndex = 0;
-
-        class="review-card"
 
         function initLiveReviews() {
             const container = document.getElementById('reviewsContainer');

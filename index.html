@@ -113,7 +113,7 @@
         }
         .secure-notice i { color: var(--success); }
 
-        /* --- SECTION VIDÉO DE PRÉSENTATION --- */
+        /* --- SECTION VIDÉO DE PRÉSENTATION (OPTIMISÉE DESKTOP/MOBILE) --- */
         .video-presentation-section { padding: 60px 8%; background: #ffffff; text-align: center; border-bottom: 1px solid #e1e8ed; }
         .video-container-box { max-width: 750px; margin: 0 auto; }
         .badge-demo { 
@@ -124,10 +124,16 @@
         .video-presentation-section h2 { color: var(--navy); font-size: 1.8rem; margin-bottom: 8px; }
         .video-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
 
-        /* Conteneur optimisé pour format Short (Vertical / 9:16) */
+        /* Conteneur optimisé format Short : hauteur maîtrisée sur PC pour éviter les barres géantes */
         .video-player-wrapper {
-            position: relative; width: 100%; max-width: 400px; margin: 0 auto; padding-top: 177.77%; 
-            background: #000; border-radius: 12px; overflow: hidden;
+            position: relative; 
+            width: 100%; 
+            max-width: 300px; 
+            height: 520px; /* Hauteur fixe idéale sur ordinateur pour éviter d'être trop long */
+            margin: 0 auto; 
+            background: #000; 
+            border-radius: 12px; 
+            overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 26, 77, 0.2);
             border: 3px solid var(--gold);
         }
@@ -148,13 +154,13 @@
         .video-placeholder-text {
             position: relative; z-index: 2; margin-bottom: 12px; max-width: 600px; padding: 0 10px;
         }
-        .video-placeholder-text h4 { font-size: 1.1rem; color: var(--bright-gold); margin-bottom: 6px; font-weight: 700; line-height: 1.3; }
-        .video-placeholder-text p { font-size: 0.85rem; opacity: 0.95; line-height: 1.4; }
+        .video-placeholder-text h4 { font-size: 1.05rem; color: var(--bright-gold); margin-bottom: 6px; font-weight: 700; line-height: 1.3; }
+        .video-placeholder-text p { font-size: 0.8rem; opacity: 0.95; line-height: 1.4; }
 
         .play-button-pulse {
-            position: relative; z-index: 2; width: 65px; height: 65px; background: var(--gold);
+            position: relative; z-index: 2; width: 60px; height: 60px; background: var(--gold);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: var(--navy); font-size: 1.5rem; padding-left: 3px;
+            color: var(--navy); font-size: 1.4rem; padding-left: 3px;
             box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7);
             animation: pulsePlay 2s infinite; transition: transform 0.2s;
             flex-shrink: 0;
@@ -384,6 +390,7 @@
         }
 
         @media (max-width: 480px) {
+            .video-player-wrapper { height: 440px; }
             .video-placeholder-text h4 { font-size: 0.95rem; }
             .video-placeholder-text p { font-size: 0.75rem; }
             .play-button-pulse { width: 50px; height: 50px; font-size: 1.2rem; }

@@ -124,8 +124,9 @@
         .video-presentation-section h2 { color: var(--navy); font-size: 1.8rem; margin-bottom: 8px; }
         .video-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
 
+        /* Conteneur optimisé pour format Short (Vertical / 9:16) */
         .video-player-wrapper {
-            position: relative; width: 100%; padding-top: 56.25%; 
+            position: relative; width: 100%; max-width: 400px; margin: 0 auto; padding-top: 177.77%; 
             background: #000; border-radius: 12px; overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 26, 77, 0.2);
             border: 3px solid var(--gold);
@@ -592,11 +593,11 @@
                 <i class="fas fa-shield-alt"></i>
             </div>
             <div class="guarantee-content">
-                <h3>Notre Engagement de Conformité et de Sérénité</h3>
-                <p>Nous voulons que vous achetiez en toute confiance. Vous recevez exactement le contenu promis (les vidéos de démonstration et les guides PDF à vie).</p>
-                <p><strong>En cas de problème technique :</strong> Si vous rencontrez un dysfonctionnement technique avéré ou un problème de réception de vos accès malgré notre support, notre équipe intervient immédiatement pour résoudre le problème ou procéder au remboursement. Notre objectif est votre entière satisfaction sur la qualité de nos outils.</p>
+                <h3>Notre Engagement de Conformité, de Sérénité et Politique de Remboursement</h3>
+                <p>Nous concevons chaque toolkit avec une exigence de qualité professionnelle pour garantir votre pleine satisfaction. Vous recevez exactement le contenu promis (les vidéos de démonstration et les guides PDF à vie).</p>
+                <p><strong>Conditions de garantie et protection contre les abus :</strong> En raison de la nature numérique des accès livrés instantanément, les demandes de remboursement sont encadrées pour protéger le travail de l'équipe et éviter les abus (téléchargement massif et réclamation injustifiée). En cas de dysfonctionnement technique avéré ou de problème de réception persistant malgré l'intervention de notre support, notre équipe intervient immédiatement pour résoudre le problème ou procéder au remboursement. Notre priorité est d'accompagner les utilisateurs sérieux et engagés.</p>
                 <div class="guarantee-instruction">
-                    Besoin d'aide avec votre accès ou une question ?
+                    Besoin d'aide avec votre accès ou une question ? Notre équipe est à votre écoute :
                 </div>
                 <div class="email-action-group">
                     <a href="mailto:support@academie-numerique.fr" class="btn-support-link">
@@ -648,7 +649,7 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    Notre équipe intervient immédiatement pour résoudre le problème ou procéder au remboursement en cas de dysfonctionnement avéré. Votre satisfaction est notre priorité.
+                    Notre équipe intervient immédiatement pour résoudre le problème ou procéder au remboursement en cas de dysfonctionnement avéré, dans le respect de notre politique de protection contre les abus.
                 </div>
             </div>
 
@@ -740,9 +741,10 @@
     <script>
         function playVideo() {
             const wrapper = document.getElementById('videoWrapper');
+            // Intégration propre du Short YouTube avec autoplay et masquage des éléments tiers/partage
             wrapper.innerHTML = `
-                <iframe src="https://www.youtube-nocookie.com/embed/pgcr9GQ7U8M?autoplay=1&mute=0&controls=1&rel=0" 
-                        title="Vidéo de présentation du succès de la formation" 
+                <iframe src="https://www.youtube-nocookie.com/embed/HQ13ZVFo-FU?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&iv_load_policy=3" 
+                        title="Vidéo de présentation du Toolkit IA Surgical" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen>
                 </iframe>

@@ -113,7 +113,7 @@
         }
         .secure-notice i { color: var(--success); }
 
-        /* --- SECTION VIDÉO DE PRÉSENTATION (OPTIMISÉE DESKTOP/MOBILE) --- */
+        /* --- SECTION VIDÉO DE PRÉSENTATION (OPTIMISÉE SANS BANDES NOIRES) --- */
         .video-presentation-section { padding: 60px 8%; background: #ffffff; text-align: center; border-bottom: 1px solid #e1e8ed; }
         .video-container-box { max-width: 750px; margin: 0 auto; }
         .badge-demo { 
@@ -124,12 +124,11 @@
         .video-presentation-section h2 { color: var(--navy); font-size: 1.8rem; margin-bottom: 8px; }
         .video-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
 
-        /* Conteneur optimisé format Short : hauteur maîtrisée sur PC pour éviter les barres géantes */
         .video-player-wrapper {
             position: relative; 
             width: 100%; 
-            max-width: 300px; 
-            height: 520px; /* Hauteur fixe idéale sur ordinateur pour éviter d'être trop long */
+            max-width: 320px; 
+            height: 568px; 
             margin: 0 auto; 
             background: #000; 
             border-radius: 12px; 
@@ -138,17 +137,18 @@
             border: 3px solid var(--gold);
         }
 
-        .video-player-wrapper iframe, 
-        .video-player-wrapper .video-placeholder-cover {
+        .video-player-wrapper iframe {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+            object-fit: cover;
         }
 
         .video-placeholder-cover {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(0,26,77,0.75), rgba(0,26,77,0.75)), 
             url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
             display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer;
             transition: 0.3s; padding: 15px; text-align: center; color: white;
-            box-sizing: border-box;
+            box-sizing: border-box; z-index: 2;
         }
 
         .video-placeholder-text {
@@ -390,10 +390,7 @@
         }
 
         @media (max-width: 480px) {
-            .video-player-wrapper { height: 440px; }
-            .video-placeholder-text h4 { font-size: 0.95rem; }
-            .video-placeholder-text p { font-size: 0.75rem; }
-            .play-button-pulse { width: 50px; height: 50px; font-size: 1.2rem; }
+            .video-player-wrapper { height: 520px; max-width: 100%; }
         }
     </style>
 </head>
@@ -546,7 +543,7 @@
         </div>
     </section>
 
-    <!-- SECTION GUIDE PDF PRATIQUE (VALEUR MAXIMISÉE) -->
+    <!-- SECTION GUIDE PDF PRATIQUE -->
     <section class="pdf-value-section">
         <div class="pdf-value-box">
             <h3><i class="fas fa-book-open"></i> Le Guide PDF Pratique : Votre manuel d'action à vie</h3>
@@ -581,13 +578,13 @@
         </div>
     </section>
 
-    <!-- SECTION : LE FORMATEUR -->
+    <!-- SECTION : LE FORMATEUR (THOMAS) -->
     <section class="author-section">
         <div class="author-card">
-            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=300" alt="Formateur" class="author-avatar">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=300" alt="Formateur Thomas" class="author-avatar">
             <div class="author-details">
                 <div class="author-role">À propos de l'Académie Numérique</div>
-                <h3>Marc & l'équipe pédagogique</h3>
+                <h3>Thomas & l'équipe pédagogique</h3>
                 <p>« Notre mission à l'Académie Numérique est de simplifier l'accès aux compétences d'avenir. Nous concevons chaque module de manière chirurgicale pour qu'il soit directement utile, afin que vous puissiez réussir vos projets en toute autonomie. »</p>
             </div>
         </div>
@@ -748,7 +745,6 @@
     <script>
         function playVideo() {
             const wrapper = document.getElementById('videoWrapper');
-            // Intégration propre du Short YouTube avec autoplay et masquage des éléments tiers/partage
             wrapper.innerHTML = `
                 <iframe src="https://www.youtube-nocookie.com/embed/HQ13ZVFo-FU?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&iv_load_policy=3" 
                         title="Vidéo de présentation du Toolkit IA Surgical" 

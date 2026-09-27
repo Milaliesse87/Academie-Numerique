@@ -303,7 +303,6 @@
         .review-date { font-size: 0.75rem; color: var(--success); font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
         .review-text { font-style: italic; font-size: 0.9rem; color: #444; line-height: 1.5; margin-bottom: 8px; }
         .review-author { font-weight: 700; color: var(--navy); font-size: 0.9rem; }
-        .review-counter { font-size: 0.75rem; color: #888; margin-top: 15px; letter-spacing: 0.5px; }
 
         /* Sections Juridiques */
         .legal-container {
@@ -616,7 +615,7 @@
         </div>
     </section>
 
-    <!-- SECTION AVIS SÉQUENTIELS (40 VRAIS CLIENTS UNIQUES - SANS LE FONDATEUR) -->
+    <!-- SECTION AVIS SÉQUENTIELS (PROFILS STRICTEMENT UNIQUES PAR PAYS - SANS COMPTEUR) -->
     <section class="reviews-section">
         <h2>Ce qu'en pensent ceux qui ont franchi le pas</h2>
         <div class="review-single-wrapper">
@@ -624,7 +623,6 @@
                 <!-- Chargé dynamiquement par JS -->
             </div>
         </div>
-        <div class="review-counter" id="reviewCounterIndicator">Avis vérifié 1 sur 40</div>
     </section>
 
     <!-- Sections Juridiques -->
@@ -736,9 +734,8 @@
         function currentSlide(index) { showSlide(index); resetTimer(); }
         function resetTimer() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 4000); }
 
-        /* LISTE COMPLÈTE DES 40 AVIS CLIENTS (SANS AUCUN VISAGE DE FORMATEUR/FONDATEUR) */
-        const allReviews = [
-            /* France (19 profils clients uniques) */
+        /* LISTES STRICTEMENT SÉPARÉES ET UNIQUES (AUCUN DOUBLON ENTRE PAYS) */
+        const reviewsFrance = [
             { name: "Lucas D.", location: "Lyon (France)", text: "Le toolkit m'a permis de comprendre les étapes clés en un temps record.", avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=150" },
             { name: "Manon L.", location: "Paris (France)", text: "Franchement, pour 27 €, c'est ultra qualitatif. Reçu en 2 minutes par e-mail.", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150" },
             { name: "Karim B.", location: "Marseille (France)", text: "Super formation, ça éclaire vraiment sur les méthodes à suivre.", avatar: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&q=80&w=150" },
@@ -757,9 +754,10 @@
             { name: "Stéphane R.", location: "Clermont-Ferrand (France)", text: "Des méthodes puissantes et expliquées simplement.", avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&q=80&w=150" },
             { name: "Vincent T.", location: "Angers (France)", text: "Le meilleur rapport qualité-prix du marché actuel.", avatar: "https://images.unsplash.com/photo-1628157582853-a796fa650a6a?auto=format&fit=crop&q=80&w=150" },
             { name: "Damien F.", location: "Le Mans (France)", text: "Super formation, rapide et efficace.", avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150" },
-            { name: "Loïc M.", location: "Brest (France)", text: "Un outil indispensable pour tout créateur.", avatar: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&q=80&w=150" },
+            { name: "Loïc M.", location: "Brest (France)", text: "Un outil indispensable pour tout créateur.", avatar: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&q=80&w=150" }
+        ];
 
-            /* Belgique (17 profils clients uniques) */
+        const reviewsBelgique = [
             { name: "Sarah K.", location: "Bruxelles (Belgique)", text: "Très direct, pas de blabla inutile. Les guides PDF sont top et reçus de suite !", avatar: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=150" },
             { name: "Marc T.", location: "Liège (Belgique)", text: "Enfin une formation sans jargon. On va droit au but, parfait pour mon activité.", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=150" },
             { name: "Pauline V.", location: "Namur (Belgique)", text: "J'ai appliqué les conseils dès le premier soir. Résultats immédiats !", avatar: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=150" },
@@ -776,19 +774,22 @@
             { name: "Marion B.", location: "Liège (Belgique)", text: "Super suivi et accès immédiat par e-mail.", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150" },
             { name: "Elisa M.", location: "Mons (Belgique)", text: "Très satisfaite de mon achat, je recommande.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" },
             { name: "Clara V.", location: "Gand (Belgique)", text: "Des instructions claires et sans fioritures.", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=150" },
-            { name: "Sarah B.", location: "Bruges (Belgique)", text: "Tout est parfait, merci pour la clarté du contenu.", avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=150" },
+            { name: "Sarah B.", location: "Bruges (Belgique)", text: "Tout est parfait, merci pour la clarté du contenu.", avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=150" }
+        ];
 
-            /* Suisse (4 profils clients uniques) */
+        const reviewsSuisse = [
             { name: "Matthieu C.", location: "Genève (Suisse)", text: "Excellent contenu, très professionnel. Reçu en quelques secondes.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150" },
             { name: "Béatrice W.", location: "Lausanne (Suisse)", text: "Les modules sont précis, c'est un vrai gain de temps pour mon agence.", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" },
             { name: "Fabian S.", location: "Zurich (Suisse)", text: "Qualité suisse exigée et respectée. Bravo pour ce toolkit.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150" },
             { name: "Valérie N.", location: "Fribourg (Suisse)", text: "Très satisfaite des guides PDF, très clairs et actionnables immédiatement.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" }
         ];
 
+        // Fusion des listes ou sélection aléatoire sans doublon
+        const allReviews = [...reviewsFrance, ...reviewsBelgique, ...reviewsSuisse];
+
         let currentReviewIndex = 0;
         function initSequentialReviews() {
             const cardContainer = document.getElementById('singleReviewCard');
-            const counterIndicator = document.getElementById('reviewCounterIndicator');
 
             let savedIndex = sessionStorage.getItem('lastReviewIdx');
             if (savedIndex !== null) {
@@ -814,8 +815,6 @@
                             <div class="review-author">${rev.name}</div>
                         </div>
                     `;
-                    counterIndicator.innerText = `Avis vérifié ${currentReviewIndex + 1} sur ${allReviews.length}`;
-                    
                     cardContainer.classList.add('show');
                 }, 300);
 

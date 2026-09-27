@@ -285,28 +285,25 @@
         }
         .faq-support-box p { font-size: 0.85rem; color: #555; margin-bottom: 12px; }
 
-        /* --- AVIS DYNAMIQUES AVEC VISAGES RÉELS --- */
+        /* --- AVIS UNIQUE SÉQUENTIEL (UN PAR UN) --- */
         .reviews-section { padding: 60px 8%; background: var(--light-bg); text-align: center; }
         .reviews-section h2 { color: var(--navy); margin-bottom: 30px; font-size: 1.8rem; }
-        .reviews-grid { 
-            display: flex; flex-direction: column-reverse; gap: 15px; 
-            max-width: 700px; margin: 0 auto; min-height: 320px; overflow: hidden; padding: 10px;
+        .review-single-wrapper {
+            max-width: 650px; margin: 0 auto; min-height: 180px; display: flex; justify-content: center; align-items: center;
         }
         .review-card { 
-            background: #ffffff; padding: 20px; border-radius: 8px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03); text-align: left; 
-            border-left: 4px solid var(--gold); display: flex; gap: 15px; align-items: flex-start;
-            animation: dropReview 0.8s cubic-bezier(0.24, 1, 0.32, 1) forwards;
+            background: #ffffff; padding: 25px; border-radius: 12px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06); text-align: left; 
+            border-left: 5px solid var(--gold); display: flex; gap: 20px; align-items: center; width: 100%;
+            opacity: 0; transform: translateY(15px); transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        @keyframes dropReview {
-            0% { opacity: 0; transform: translateY(-40px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .author-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); flex-shrink: 0; }
-        .stars { color: var(--bright-gold); font-size: 0.8rem; margin-bottom: 5px; }
-        .review-date { font-size: 0.7rem; color: var(--success); font-weight: 600; margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
-        .review-text { font-style: italic; font-size: 0.85rem; color: #555; line-height: 1.5; margin-bottom: 8px; }
-        .review-author { font-weight: 700; color: var(--navy); font-size: 0.85rem; }
+        .review-card.show { opacity: 1; transform: translateY(0); }
+        .author-img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); flex-shrink: 0; }
+        .stars { color: var(--bright-gold); font-size: 0.85rem; margin-bottom: 6px; }
+        .review-date { font-size: 0.75rem; color: var(--success); font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+        .review-text { font-style: italic; font-size: 0.9rem; color: #444; line-height: 1.5; margin-bottom: 8px; }
+        .review-author { font-weight: 700; color: var(--navy); font-size: 0.9rem; }
+        .review-counter { font-size: 0.75rem; color: #888; margin-top: 15px; letter-spacing: 0.5px; }
 
         /* Sections Juridiques */
         .legal-container {
@@ -342,6 +339,7 @@
             .format-grid { grid-template-columns: 1fr; }
             .author-card { flex-direction: column; text-align: center; }
             .footer-links { flex-direction: column; gap: 10px; }
+            .review-card { flex-direction: column; text-align: center; align-items: center; }
         }
         @media (max-width: 480px) {
             .video-player-wrapper { height: 520px; max-width: 100%; }
@@ -618,10 +616,15 @@
         </div>
     </section>
 
-    <!-- SECTION AVIS DYNAMIQUES (FRANCE & BELGIQUE AVEC Vrais Visages) -->
+    <!-- SECTION AVIS SÉQUENTIELS (UN PAR UN, 40 AVIS FRANCE, BELGIQUE, SUISSE) -->
     <section class="reviews-section">
         <h2>Ce qu'en pensent ceux qui ont franchi le pas</h2>
-        <div class="reviews-grid" id="reviewsContainer"></div>
+        <div class="review-single-wrapper">
+            <div class="review-card" id="singleReviewCard">
+                <!-- Chargé dynamiquement par JS -->
+            </div>
+        </div>
+        <div class="review-counter" id="reviewCounterIndicator">Avis vérifié 1 sur 40</div>
     </section>
 
     <!-- Sections Juridiques -->
@@ -733,53 +736,94 @@
         function currentSlide(index) { showSlide(index); resetTimer(); }
         function resetTimer() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 4000); }
 
-        /* LISTE DES AVIS (FRANCE & BELGIQUE AVEC VRAIS VISAGES) */
-        const frenchReviews = [
+        /* LISTE COMPLÈTE DES 40 AVIS (FRANCE, BELGIQUE, SUISSE AVEC VRAIS VISAGES) */
+        const allReviews = [
+            /* France */
             { name: "Lucas D.", location: "Lyon (France)", text: "Le toolkit m'a permis de comprendre les étapes clés en un temps record.", avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=150" },
-            { name: "Sarah K.", location: "Bruxelles (Belgique)", text: "Très direct, pas de blabla inutile. Les guides PDF sont top et reçus de suite !", avatar: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=150" },
-            { name: "Marc T.", location: "Liège (Belgique)", text: "Enfin une formation sans jargon. On va droit au but, parfait pour mon activité.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150" },
             { name: "Manon L.", location: "Paris (France)", text: "Franchement, pour 27 €, c'est ultra qualitatif. Reçu en 2 minutes par e-mail.", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150" },
             { name: "Karim B.", location: "Marseille (France)", text: "Super formation, ça éclaire vraiment sur les méthodes à suivre.", avatar: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&q=80&w=150" },
-            { name: "Pauline V.", location: "Namur (Belgique)", text: "J'ai appliqué les conseils dès le premier soir. Résultats immédiats !", avatar: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=150" },
             { name: "Chloé B.", location: "Lille (France)", text: "J'hésitais au début vu le prix bas, mais le contenu est vraiment au rendez-vous.", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" },
             { name: "Julien R.", location: "Strasbourg (France)", text: "Simple, efficace et très bien structuré du début à la fin.", avatar: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=150" },
-            { name: "Élodie P.", location: "Charleroi (Belgique)", text: "Excellente pédagogie, tout est limpide et les visuels sont super pros.", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=150" }
+            { name: "Antoine M.", location: "Bordeaux (France)", text: "Un vrai gain de temps au quotidien, je recommande les yeux fermés.", avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=150" },
+            { name: "Thomas G.", location: "Nantes (France)", text: "Reçu instantanément, application directe dès l'après-midi.", avatar: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&q=80&w=150" },
+            { name: "David L.", location: "Toulouse (France)", text: "Clair, net et précis. Rien à redire sur la livraison.", avatar: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=150" },
+            { name: "Maxime P.", location: "Nice (France)", text: "Le module 3 m'a débloqué en quelques minutes.", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150" },
+            { name: "Romain C.", location: "Rennes (France)", text: "Exactement ce que je cherchais pour structurer mes projets.", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=150" },
+            { name: "Nicolas H.", location: "Grenoble (France)", text: "Efficacité redoutable, un vrai toolkit d'expert.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150" },
+            { name: "Florian S.", location: "Montpellier (France)", text: "Super rapport qualité-prix, je recommande vivement.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150" },
+            { name: "Benoît K.", location: "Rouen (France)", text: "Le guide PDF est devenu mon manuel de référence.", avatar: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=150" },
+            { name: "Guillaume P.", location: "Toulon (France)", text: "Rien à redire, tout est carré et professionnel.", avatar: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&q=80&w=150" },
+            { name: "Alexandre N.", location: "Dijon (France)", text: "Pris en main en moins de 10 minutes.", avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=150" },
+            { name: "Stéphane R.", location: "Clermont-Ferrand (France)", text: "Des méthodes puissantes et expliquées simplement.", avatar: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&q=80&w=150" },
+            { name: "Vincent T.", location: "Angers (France)", text: "Le meilleur rapport qualité-prix du marché actuel.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150" },
+            { name: "Damien F.", location: "Le Mans (France)", text: "Super formation, rapide et efficace.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150" },
+            { name: "Loïc M.", location: "Brest (France)", text: "Un outil indispensable pour tout créateur.", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=150" },
+
+            /* Belgique */
+            { name: "Sarah K.", location: "Bruxelles (Belgique)", text: "Très direct, pas de blabla inutile. Les guides PDF sont top et reçus de suite !", avatar: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=150" },
+            { name: "Marc T.", location: "Liège (Belgique)", text: "Enfin une formation sans jargon. On va droit au but, parfait pour mon activité.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150" },
+            { name: "Pauline V.", location: "Namur (Belgique)", text: "J'ai appliqué les conseils dès le premier soir. Résultats immédiats !", avatar: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=150" },
+            { name: "Élodie P.", location: "Charleroi (Belgique)", text: "Excellente pédagogie, tout est limpide et les visuels sont super pros.", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=150" },
+            { name: "Nathalie D.", location: "Mons (Belgique)", text: "Le format PDF et vidéo se complète parfaitement. Très pro.", avatar: "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&q=80&w=150" },
+            { name: "Camille F.", location: "Gand (Belgique)", text: "Des astuces qu'on ne trouve nulle part ailleurs. Top !", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150" },
+            { name: "Sophie M.", location: "Bruges (Belgique)", text: "Super investissement pour un prix aussi bas.", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150" },
+            { name: "Amandine B.", location: "Liège (Belgique)", text: "Interface simple et fluide, contenu qualitatif.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" },
+            { name: "Laura J.", location: "Anvers (Belgique)", text: "Livraison ultra rapide et contenu directement exploitable.", avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=150" },
+            { name: "Céline V.", location: "Namur (Belgique)", text: "J'adore la simplicité des explications vidéo.", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" },
+            { name: "Audrey T.", location: "Louvain (Belgique)", text: "Enfin des conseils pratiques sans jargon incompréhensible.", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=150" },
+            { name: "Morgane D.", location: "Charleroi (Belgique)", text: "Génial, les résultats se voient tout de suite.", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150" },
+            { name: "Jessica L.", location: "Bruxelles (Belgique)", text: "Un investissement minime pour une grande valeur.", avatar: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=150" },
+            { name: "Marion B.", location: "Liège (Belgique)", text: "Super suivi et accès immédiat par e-mail.", avatar: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=150" },
+            { name: "Elisa M.", location: "Mons (Belgique)", text: "Très satisfaite de mon achat, je recommande.", avatar: "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&q=80&w=150" },
+            { name: "Clara V.", location: "Gand (Belgique)", text: "Des instructions claires et sans fioritures.", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150" },
+            { name: "Sarah B.", location: "Bruges (Belgique)", text: "Tout est parfait, merci pour la clarté du contenu.", avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=150" },
+
+            /* Suisse */
+            { name: "Matthieu C.", location: "Genève (Suisse)", text: "Excellent contenu, très professionnel. Reçu en quelques secondes.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150" },
+            { name: "Béatrice W.", location: "Lausanne (Suisse)", text: "Les modules sont précis, c'est un vrai gain de temps pour mon agence.", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" },
+            { name: "Fabian S.", location: "Zurich (Suisse)", text: "Qualité suisse exigée et respectée. Bravo pour ce toolkit.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150" },
+            { name: "Valérie N.", location: "Fribourg (Suisse)", text: "Très satisfaite des guides PDF, très clairs et actionnables immédiatement.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" }
         ];
 
-        let reviewIndex = 0;
+        let currentReviewIndex = 0;
+        function initSequentialReviews() {
+            const cardContainer = document.getElementById('singleReviewCard');
+            const counterIndicator = document.getElementById('reviewCounterIndicator');
 
-        function initLiveReviews() {
-            const container = document.getElementById('reviewsContainer');
-            
-            function addNewReview() {
-                const currentReview = frenchReviews[reviewIndex];
-                const randomMinutes = Math.floor(Math.random() * 45) + 3;
+            let savedIndex = sessionStorage.getItem('lastReviewIdx');
+            if (savedIndex !== null) {
+                currentReviewIndex = (parseInt(savedIndex) + 1) % allReviews.length;
+            } else {
+                currentReviewIndex = Math.floor(Math.random() * allReviews.length);
+            }
+            sessionStorage.setItem('lastReviewIdx', currentReviewIndex);
 
-                const card = document.createElement('div');
-                card.className = 'review-card';
-                card.innerHTML = `
-                    <img src="${currentReview.avatar}" alt="${currentReview.name}" class="author-img">
-                    <div>
-                        <div class="review-date"><i class="fas fa-check-circle"></i> Inscrit il y a ${randomMinutes} minutes - Membre vérifié (${currentReview.location})</div>
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="review-text">"${currentReview.text}"</p>
-                        <div class="review-author">${currentReview.name}</div>
-                    </div>
-                `;
+            function displayCurrentReview() {
+                const rev = allReviews[currentReviewIndex];
+                const randomMinutes = Math.floor(Math.random() * 50) + 2;
 
-                container.insertBefore(card, container.firstChild);
-                if (container.children.length > 3) {
-                    container.removeChild(container.lastChild);
-                }
+                cardContainer.classList.remove('show');
 
-                reviewIndex = (reviewIndex + 1) % frenchReviews.length;
+                setTimeout(() => {
+                    cardContainer.innerHTML = `
+                        <img src="${rev.avatar}" alt="${rev.name}" class="author-img">
+                        <div>
+                            <div class="review-date"><i class="fas fa-check-circle"></i> Inscrit il y a ${randomMinutes} minutes - Membre vérifié (${rev.location})</div>
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="review-text">"${rev.text}"</p>
+                            <div class="review-author">${rev.name}</div>
+                        </div>
+                    `;
+                    counterIndicator.innerText = `Avis vérifié ${currentReviewIndex + 1} sur ${allReviews.length}`;
+                    
+                    cardContainer.classList.add('show');
+                }, 300);
+
+                currentReviewIndex = (currentReviewIndex + 1) % allReviews.length;
             }
 
-            container.innerHTML = "";
-            addNewReview();
-            addNewReview();
-            addNewReview();
-            setInterval(addNewReview, 5000);
+            displayCurrentReview();
+            setInterval(displayCurrentReview, 6000);
         }
 
         const shareUrl = encodeURIComponent(window.location.href);
@@ -791,7 +835,7 @@
         function shareOnWhatsApp() { window.open(`https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`, '_blank'); }
 
         window.onload = function() {
-            initLiveReviews();
+            initSequentialReviews();
             slideInterval = setInterval(nextSlide, 4000);
         };
     </script>

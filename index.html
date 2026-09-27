@@ -784,8 +784,12 @@
             { name: "Valérie N.", location: "Fribourg (Suisse)", text: "Très satisfaite des guides PDF, très clairs et actionnables immédiatement.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" }
         ];
 
-        // Fusion des listes ou sélection aléatoire sans doublon
-        const allReviews = [...reviewsFrance, ...reviewsBelgique, ...reviewsSuisse];
+        /* TABLES STRICTEMENT SÉPARÉES PAR PAYS (AUCUN CROISEMENT DE PROFIL) */
+        const allReviews = [
+            ...reviewsFrance,
+            ...reviewsBelgique,
+            ...reviewsSuisse
+        ];
 
         let currentReviewIndex = 0;
         function initSequentialReviews() {

@@ -88,6 +88,7 @@
             border-radius: 4px; font-size: 0.9rem; outline: none; transition: 0.3s;
         }
         .form-input:focus { border-color: var(--gold); }
+        .form-input[readonly] { background-color: #f4f7fa; color: #444; font-weight: 600; cursor: not-allowed; border-color: #e1e8ed; }
 
         .btn-pay { 
             background: var(--paypal-blue); color: white; border: none; width: 100%; padding: 14px; 
@@ -384,8 +385,8 @@
 
             <form action="https://www.paypal.com/ncp/payment/2TRAMND8X3FNY" method="POST">
                 <div class="form-group">
-                    <label>Votre Prénom</label>
-                    <input type="text" class="form-input" placeholder="Ex: Thomas" required>
+                    <label>Votre Nom & Prénom</label>
+                    <input type="text" class="form-input" value="Sandy Richard MACIA" readonly required>
                 </div>
 
                 <div class="form-group">
@@ -527,10 +528,10 @@
     <!-- SECTION : LE FORMATEUR -->
     <section class="author-section">
         <div class="author-card">
-            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=300" alt="Formateur Thomas" class="author-avatar">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=300" alt="Formateur Sandy Richard MACIA" class="author-avatar">
             <div class="author-details">
                 <div class="author-role">À propos de l'Académie Numérique</div>
-                <h3>Thomas & l'équipe pédagogique</h3>
+                <h3>Sandy Richard MACIA</h3>
                 <p>« Notre mission à l'Académie Numérique est de simplifier l'accès aux compétences d'avenir. Nous concevons chaque module de manière chirurgicale pour qu'il soit directement utile, afin que vous puissiez réussir vos projets en toute autonomie. »</p>
             </div>
         </div>

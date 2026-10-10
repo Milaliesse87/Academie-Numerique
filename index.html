@@ -17,6 +17,7 @@
             --light-bg: #F4F7FA;
             --white: #FFFFFF;
             --success: #27ae60;
+            --paypal-blue: #0070BA;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
@@ -89,23 +90,16 @@
         .form-input:focus { border-color: var(--gold); }
 
         .btn-pay { 
-            background: var(--navy); color: white; border: none; width: 100%; padding: 14px; 
+            background: var(--paypal-blue); color: white; border: none; width: 100%; padding: 14px; 
             font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: 0.3s; border-radius: 4px;
             display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;
         }
-        .btn-pay:hover { background: var(--navy-light); }
+        .btn-pay:hover { background: #005ea6; }
 
         .payment-logos {
-            display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 15px;
+            display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 15px; font-weight: 700; color: var(--paypal-blue); font-size: 1.1rem;
         }
-        .payment-logos i.fa-cc-visa { font-size: 2rem; color: #1A1F71; }
-        
-        .mastercard-logo {
-            display: inline-flex; position: relative; width: 34px; height: 22px; align-items: center; justify-content: center;
-        }
-        .mastercard-logo span { position: absolute; width: 20px; height: 20px; border-radius: 50%; }
-        .mastercard-circle-1 { background-color: #EB001B; left: 0; opacity: 0.9; }
-        .mastercard-circle-2 { background-color: #F79E1B; right: 0; opacity: 0.9; }
+        .payment-logos i { font-size: 1.5rem; }
 
         .secure-notice { 
             display: flex; align-items: center; justify-content: center; gap: 8px; 
@@ -388,7 +382,7 @@
                 <i class="fas fa-bolt"></i> <strong>Livraison automatique :</strong> Vos accès sont envoyés instantanément <strong>en 2 minutes par e-mail</strong>.
             </div>
 
-            <form action="ICI_METTRE_TON_LIEN_PLATEFORME_INTERMEDIAIRE" method="POST">
+            <form action="https://www.paypal.com/ncp/payment/2TRAMND8X3FNY" method="POST">
                 <div class="form-group">
                     <label>Votre Prénom</label>
                     <input type="text" class="form-input" placeholder="Ex: Thomas" required>
@@ -400,20 +394,16 @@
                 </div>
 
                 <button type="submit" class="btn-pay">
-                    <i class="fas fa-lock"></i> Obtenir mon accès complet à 27 €
+                    <i class="fab fa-paypal"></i> Payer avec PayPal - 27 €
                 </button>
             </form>
 
             <div class="payment-logos">
-                <i class="fab fa-cc-visa" title="Visa"></i>
-                <div class="mastercard-logo" title="Mastercard">
-                    <span class="mastercard-circle-1"></span>
-                    <span class="mastercard-circle-2"></span>
-                </div>
+                <i class="fab fa-paypal"></i> Paiement 100% sécurisé via PayPal
             </div>
 
             <div class="secure-notice">
-                <i class="fas fa-shield-alt"></i> Paiement 100% chiffré • <strong>Livraison e-mail en 2 min</strong>
+                <i class="fas fa-shield-alt"></i> Paiement sécurisé • <strong>Livraison e-mail en 2 min</strong>
             </div>
         </div>
     </section>
@@ -556,7 +546,7 @@
                 <p><strong>Conditions de garantie et protection contre les abus :</strong> En raison de la nature numérique des accès livrés instantanément, les demandes de remboursement sont encadrées pour protéger le travail de l'équipe et éviter les abus. En cas de dysfonctionnement technique avéré ou de problème de réception persistant, notre équipe intervient immédiatement pour résoudre le problème ou procéder au remboursement.</p>
                 <div class="guarantee-instruction">Besoin d'aide avec votre accès ou une question ? Notre équipe est à votre écoute :</div>
                 <div class="email-action-group">
-                    <a href="mailto:support@academie-numerique.fr" class="btn-support-link">
+                    <a href="mailto:support@numerique-academie.com" class="btn-support-link">
                         <i class="fas fa-paper-plane"></i> Contactez notre support
                     </a>
                 </div>
@@ -608,7 +598,7 @@
         <div class="faq-support-box">
             <p><i class="fas fa-headset" style="color: var(--navy);"></i> Une question ? Besoin d'aide avec votre accès ?</p>
             <div class="email-action-group" style="justify-content: center;">
-                <a href="mailto:support@academie-numerique.fr" class="btn-support-link">
+                <a href="mailto:support@numerique-academie.com" class="btn-support-link">
                     <i class="fas fa-paper-plane"></i> Envoyer un e-mail
                 </a>
             </div>
@@ -631,7 +621,7 @@
         <h3>Article 1 - Objet et Champ d'Application</h3>
         <p>Les présentes Conditions Générales de Vente régissent la vente du Toolkit IA "Surgical" (7 modules) proposé par l'Académie Numérique.</p>
         <h3>Article 2 - Prix et Modalité de Commande</h3>
-        <p>Le tarif promotionnel d'accès immédiat est fixé à 27 € (au lieu de 97 €). Le paiement s'effectue en un versement unique par carte bancaire par le biais de notre plateforme de paiement sécurisée.</p>
+        <p>Le tarif promotionnel d'accès immédiat est fixé à 27 € (au lieu de 97 €). Le paiement s'effectue en un versement unique via PayPal par le biais de notre plateforme de paiement sécurisée.</p>
         <h3>Article 3 - Modalités de Livraison</h3>
         <p>L'accès aux vidéos de démonstration et aux guides PDF à vie est envoyé de manière automatisée par courrier électronique en 2 minutes chrono suivant la validation du paiement.</p>
     </section>
@@ -642,9 +632,9 @@
         <h3>1. Données Collectées</h3>
         <p>Seuls le prénom et l'adresse e-mail renseignés dans le formulaire d'inscription sont collectés afin de permettre la livraison des accès au service.</p>
         <h3>2. Sécurité des Paiements</h3>
-        <p>Aucune donnée bancaire n'est collectée ou stockée par notre site ; l'ensemble des transactions financières est géré de manière sécurisée par la passerelle de paiement intermédiaire.</p>
+        <p>Aucune donnée financière n'est collectée ou stockée par notre site ; l'ensemble des transactions est géré de manière sécurisée par PayPal.</p>
         <h3>3. Droits des Utilisateurs</h3>
-        <p>Conformément au RGPD, vous disposez d'un droit d'accès, de modification et de suppression de vos données en écrivant à support@academie-numerique.fr.</p>
+        <p>Conformément au RGPD, vous disposez d'un droit d'accès, de modification et de suppression de vos données en écrivant à support@numerique-academie.com.</p>
     </section>
 
     <section id="mentions" class="legal-container">
@@ -652,7 +642,7 @@
         <p><strong>Dénomination sociale :</strong> Académie Numérique</p>
         <p><strong>Siège social :</strong> 10 Rue de la République, 75001 Paris, France</p>
         <p><strong>Numéro SIRET :</strong> 123 456 789 00012</p>
-        <p><strong>Contact Support :</strong> support@academie-numerique.fr</p>
+        <p><strong>Contact Support :</strong> support@numerique-academie.com</p>
         <p><strong>Hébergement :</strong> Plateforme Cloud sécurisée</p>
     </section>
 
@@ -665,9 +655,9 @@
                 <a href="#mentions">Mentions Légales</a>
             </div>
             <div class="footer-support-container">
-                <p style="color: #ccc; margin-bottom: 8px;">Une question ? Contactez-nous à : <strong>support@academie-numerique.fr</strong></p>
+                <p style="color: #ccc; margin-bottom: 8px;">Une question ? Contactez-nous à : <strong>support@numerique-academie.com</strong></p>
                 <div class="email-action-group" style="justify-content: center;">
-                    <a href="mailto:support@academie-numerique.fr" class="btn-support-link">
+                    <a href="mailto:support@numerique-academie.com" class="btn-support-link">
                         <i class="fas fa-paper-plane"></i> Envoyer un e-mail
                     </a>
                 </div>
@@ -681,9 +671,9 @@
         </div>
         <div class="footer-bottom">
             <p>Académie Numérique - Tous droits réservés</p>
-            Adresse : 10 Rue de la République, 75001 Paris, France | Support : support@academie-numerique.fr<br>
+            Adresse : 10 Rue de la République, 75001 Paris, France | Support : support@numerique-academie.com<br>
             SIRET : 123 456 789 00012 | RCS Paris<br>
-            Paiements sécurisés par carte bancaire.
+            Paiements sécurisés par PayPal.
         </div>
     </footer>
 
